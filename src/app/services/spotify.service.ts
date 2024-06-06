@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { SpotifyConfiguration } from '../../environments/environment';
+import Spotify from 'spotify-web-api-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpotifyService {
-  constructor() {}
+  spotifyApi: Spotify.SpotifyWebApiJs = null;
+
+  constructor() {
+    this.spotifyApi = new Spotify(); // inicializando Spotify
+  }
 
   obterUrlLogin() {
     const authEndpoint = `${SpotifyConfiguration.authEndpoint}?`;
@@ -14,5 +19,17 @@ export class SpotifyService {
     const scopes = `scope=${SpotifyConfiguration.scopes.join('%20')}&`;
     const responseType = `response_type=token&show_dialog=true`;
     return authEndpoint + clientId + redirectUrl + scopes + responseType;
+  }
+
+  obterTokenUrlCallback() {
+    if (!window.location.hash) return '';
+
+    const params = window.location.hash.substring(1).split('&');
+    return params[0].split('=')[1];
+  }
+
+  definirAcessToken(token: string) {
+    this.spotifyApi.setAccessToken(token);
+    localStorage.setItem('token', token); // essa linha impede que seja feito um login toda vez que a pagina é recarregada
   }
 }
