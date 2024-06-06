@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   abrirPaginaLogin() {
-    // window.location.href =
-    console.log(this.spotifyService.obterUrlLogin());
+    window.location.href = this.spotifyService.obterUrlLogin();
   }
 }
