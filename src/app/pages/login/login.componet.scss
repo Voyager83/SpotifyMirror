@@ -1,0 +1,32 @@
+@import 'variaveis';
+
+:host {
+    background-color: #222;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column; // a imagem ficará em cima e o botão em baixo
+
+    .base {
+        width: 100%; // representará 100% do componente pai
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-around; // o css tentará colocar os itens em um espaço idêntico ( espaço,item...)
+
+        img {
+            width: 40%;
+        }
+
+        button {
+          font-size: 1.5rem; // o REM respeita a fonte que o usuario colocou no navegador
+          min-width: 200px;
+          padding: 20px;
+          border-radius: 500px;
+          background-color: $cor-primaria;
+          color: white;
+          border: 0;
+          cursor: pointer;
+        }
+
+    }
+}
